@@ -29,12 +29,13 @@ function scrape(query, callback) {
 exports.scrape = scrape;
 // Module class declaration
 class Scraper extends stream_1.Readable {
-    constructor(query) {
+    constructor( query ,  callback ) {
         super({ objectMode: true });
         this.total = 0;
         this.session = null;
         this.fixed = null;
         this.lastTweet = null;
+        this.callback = callback;
         if (typeof query !== 'string') {
             throw new Error('Query must be a string');
         }
@@ -127,14 +128,15 @@ class Scraper extends stream_1.Readable {
             const maxPositionStr = $(SESSION_CONTAINER).attr('data-max-position');
             // const maxPositionStr = this.unleak( $( SESSION_CONTAINER ).attr( 'data-max-position' ) );
             const tweets = this.parsePage($);
-            if (maxPositionStr) {
-                const maxPosition = this.parseMaxPosition(maxPositionStr);
-                return callback(null, maxPosition);
-            }
-            else {
-                const error = new Error('"data-max-position" not found in "' + SESSION_CONTAINER + '"');
-                return callback(error);
-            }
+            return this.callback( tweets );
+            // if (maxPositionStr) {
+            //     const maxPosition = this.parseMaxPosition(maxPositionStr);
+            //     return callback(null, maxPosition);
+            // }
+            // else {
+            //     const error = new Error('"data-max-position" not found in "' + SESSION_CONTAINER + '"');
+            //     return callback(error);
+            // }
         });
     }
     // Tweet data extraction

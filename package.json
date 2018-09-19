@@ -1,5 +1,5 @@
 {
-	"name": "simple-twitter-scraper",
+	"name": "simple-twitter-scraper-2",
 	"version": "0.0.1",
 	"description": "Simplify twitter scraper using adapted twitter-scraper package.",
 	"main": ".#t1.js",
@@ -13,9 +13,6 @@
 	"devDependencies": {},
 	"engines": { "node": ">= 0.4.0" },
 	"preferGlobal": true,
-	"bin": {
-		"simple-twitter-scraper": "main.js"
-	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
